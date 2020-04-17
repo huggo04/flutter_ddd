@@ -2,22 +2,31 @@ import 'package:dartz/dartz.dart';
 import 'package:flutter/foundation.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:flutter_ddd/domain/core/failures.dart';
+import 'package:flutter_ddd/domain/core/value_objects.dart';
+import 'package:flutter_ddd/domain/core/value_validators.dart';
 
-@immutable
-abstract class ValueObject<T> {
-  const ValueObject();
-  Either<ValueFailure<T>, T> get value;
+class EmailAddress extends ValueObject<String> {
+  final Either<ValueFailure<String>, String> value;
 
-  @override
-  bool operator ==(Object o) {
-    if (identical(this, o)) return true;
-
-    return o is ValueObject<T> && o.value == value;
+  factory EmailAddress(String input) {
+    assert(input != null);
+    return EmailAddress._(
+      validateEmailAddress(input),
+    );
   }
 
-  @override
-  int get hashCode => value.hashCode;
+  const EmailAddress._(this.value);
+}
 
-  @override
-  String toString() => 'Value($value)';
+class Password extends ValueObject<String> {
+  final Either<ValueFailure<String>, String> value;
+
+  factory Password(String input) {
+    assert(input != null);
+    return Password._(
+      validatePassword(input),
+    );
+  }
+
+  const Password._(this.value);
 }
