@@ -8,7 +8,6 @@ import 'package:flutter_ddd/domain/auth/auth_failure.dart';
 import 'package:flutter_ddd/domain/auth/value_objects.dart';
 import 'package:injectable/injectable.dart';
 
-
 @lazySingleton
 @RegisterAs(IAuthFacade)
 class FirebaseAuthFacade implements IAuthFacade {
